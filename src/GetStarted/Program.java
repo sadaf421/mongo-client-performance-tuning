@@ -19,24 +19,23 @@ public class Program {
 	/*
 	* Replace connection string from the Azure Cosmos DB Portal
         */
-        MongoClientURI uri = new MongoClientURI("FILLME");
+        MongoClientURI uri = new MongoClientURI("mongodb://azurecoosmosaccount:SdRXTfXkyl8inkCOZ1GaUBSga3oofnFiVYdHyaZsdFdwfbzQQrWGrST7BYSfIKIw8MnxrSwKADi0wq0Wiok1wA==@azurecoosmosaccount.documents.azure.com:10255/?ssl=true&replicaSet=globaldb");
 		
         MongoClient mongoClient = null;
         try {
             mongoClient = new MongoClient(uri);        
             
             // Get database
-            MongoDatabase database = mongoClient.getDatabase("db");
+            MongoDatabase database = mongoClient.getDatabase("azurecoosmosaccount");
 
             // Get collection
-            MongoCollection<Document> collection = database.getCollection("coll");
-
-            // Insert documents
-            Document document1 = new Document("fruit", "apple");
-            collection.insertOne(document1);
+            MongoCollection<Document> collection = database.getCollection("provider");
             
-            Document document2 = new Document("fruit", "mango");
-            collection.insertOne(document2);            
+         // Get collection
+            MongoCollection<Document> collection_two = database.getCollection("provider_two");
+
+            Document document1 = new Document("fruit", "apple");
+            collection.insertOne(document1);        
 
             // Find fruits by name
             Document queryResult = collection.find(Filters.eq("fruit", "apple")).first();
