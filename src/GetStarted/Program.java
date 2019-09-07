@@ -38,7 +38,7 @@ public class Program {
             collection.insertOne(document1);        
 
             // Find fruits by name
-            Document queryResult = collection.find(Filters.eq("fruit", "apple")).first();
+            Document queryResult = collection.find(Filters.eq("fruit", "apple")).modifiers(new Document("$explain", true)) .first();
             System.out.println(queryResult.toJson());    	
         	
             System.out.println( "Completed successfully" );  
